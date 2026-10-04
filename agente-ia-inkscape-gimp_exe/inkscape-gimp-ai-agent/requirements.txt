@@ -1,0 +1,9 @@
+# El nucleo (core/) usa SOLO la biblioteca estandar de Python: no requiere pip.
+# Estas dependencias son opcionales y mejoran funciones concretas.
+
+# Para la extension de Inkscape (normalmente ya lo trae Inkscape):
+lxml>=4.9
+
+# Para scripts de imagen generados por el agente (opcionales):
+# Pillow>=10.0
+# numpy>=1.24

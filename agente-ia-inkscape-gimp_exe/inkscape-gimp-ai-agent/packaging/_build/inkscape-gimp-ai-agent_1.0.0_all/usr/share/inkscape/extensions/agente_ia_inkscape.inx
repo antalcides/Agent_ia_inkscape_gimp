@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Agente IA - Crear y corregir vectorial</name>
+    <id>org.agenteia.inkscape.vector</id>
+    <param name="tab" type="notebook">
+        <page name="pedido" gui-text="Pedido">
+            <param name="provider" type="optiongroup" gui-text="Proveedor"
+                   gui-description="Elige el proveedor de IA (nube o local).">
+                <option value="openai">OpenAI (nube)</option>
+                <option value="anthropic">Anthropic (nube)</option>
+                <option value="gemini">Google Gemini (nube)</option>
+                <option value="openrouter">OpenRouter (nube)</option>
+                <option value="omniroute">OmniRoute (nube o gateway)</option>
+                <option value="ollama">Ollama (local)</option>
+                <option value="lmstudio">LM Studio (local)</option>
+                <option value="custom">Personalizado (compatible OpenAI)</option>
+            </param>
+            <param name="model" type="string" gui-text="Modelo"
+                   gui-description="Pulsa Aplicar para listar; escribe o deja el valor sugerido."/>
+            <param name="mode" type="optiongroup" gui-text="Modo">
+                <option value="crear">Crear nuevo SVG con IA</option>
+                <option value="corregir_seleccion">Corregir la seleccion actual</option>
+                <option value="corregir_documento">Corregir el documento completo</option>
+            </param>
+            <param name="prompt" type="string" gui-text="Descripcion del trabajo"
+                   gui-description="Ejemplo: crea un logo minimalista de una hoja con la palabra Verde."
+                   multiline="true" gui-text-as="normal"/>
+            <param name="save_copy" type="bool" gui-text="Guardar una copia en disco">true</param>
+        </page>
+        <page name="avanzado" gui-text="Avanzado">
+            <param name="api_key" type="string" gui-text="Clave de API (opcional)"
+                   gui-description="Si se deja vacia se usa la clave guardada o la variable de entorno."/>
+            <param name="base_url" type="string" gui-text="URL base (opcional)"
+                   gui-description="Solo para proveedores locales o personalizados."/>
+            <param name="temperature" type="float" min="0" max="2" gui-text="Temperatura">0.2</param>
+            <param name="max_tokens" type="int" min="256" max="32768" gui-text="Max tokens">8192</param>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="Agente IA"/>
+        </effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">agente_ia_inkscape.py</command>
+    </script>
+</inkscape-extension>

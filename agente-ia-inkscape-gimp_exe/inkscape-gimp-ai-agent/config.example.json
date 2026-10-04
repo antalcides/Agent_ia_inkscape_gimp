@@ -1,0 +1,24 @@
+{
+  "provider": "ollama",
+  "model": "",
+  "temperature": 0.2,
+  "max_tokens": 8192,
+  "timeout": 600,
+  "image_size": "1024x1024",
+  "output_dir": "",
+  "last_prompt": "",
+  "api_keys": {
+    "openai": "",
+    "anthropic": "",
+    "gemini": "",
+    "openrouter": "",
+    "omniroute": "",
+    "ollama": "",
+    "lmstudio": "",
+    "custom": ""
+  },
+  "base_url_override": {
+    "omniroute": "",
+    "custom": "http://localhost:8000/v1"
+  }
+}

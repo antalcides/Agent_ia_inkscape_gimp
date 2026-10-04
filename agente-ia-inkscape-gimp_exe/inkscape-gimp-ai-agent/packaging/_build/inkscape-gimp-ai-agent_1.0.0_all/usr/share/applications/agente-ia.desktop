@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Agente IA para Inkscape y GIMP
+GenericName=Asistente de IA grafico
+Comment=Crea y corrige imagenes vectoriales (SVG) y bitmaps (PNG/JPG) con IA
+Exec=agente-ia
+Terminal=false
+Icon=applications-graphics
+Categories=Graphics;2DGraphics;VectorGraphics;RasterGraphics;
+Keywords=IA;AI;Inkscape;GIMP;SVG;imagen;vector;bitmap;
+StartupNotify=true

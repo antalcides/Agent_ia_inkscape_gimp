@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+# Precompila el nucleo para acelerar el primer arranque (no es critico).
+if command -v python3 >/dev/null 2>&1; then
+    python3 -m compileall -q /usr/lib/inkscape-gimp-ai-agent/core >/dev/null 2>&1 || true
+fi
+# Actualiza la cache del menu de escritorio si esta disponible.
+if command -v update-desktop-database >/dev/null 2>&1; then
+    update-desktop-database -q /usr/share/applications >/dev/null 2>&1 || true
+fi
+exit 0

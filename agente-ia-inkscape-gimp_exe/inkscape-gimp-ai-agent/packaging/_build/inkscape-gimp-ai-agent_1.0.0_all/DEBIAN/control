@@ -1,0 +1,24 @@
+Package: inkscape-gimp-ai-agent
+Version: 1.0.0
+Section: graphics
+Priority: optional
+Architecture: all
+Depends: python3 (>= 3.11), python3-tk, python3-lxml
+Recommends: inkscape, gimp
+Suggests: python3-pil, python3-numpy
+Installed-Size: 260
+Maintainer: Agente IA <soporte@example.org>
+Homepage: https://example.org/inkscape-gimp-ai-agent
+Description: Agente de IA para Inkscape y GIMP
+ Crea y corrige imagenes vectoriales (SVG) y bitmaps (PNG/JPG) usando el
+ modelo y proveedor de IA que se elija: OpenAI, Anthropic, Google Gemini,
+ OpenRouter, OmniRoute, Ollama, LM Studio o cualquier servidor compatible
+ con la API de OpenAI (modelos locales o en la nube).
+ .
+ Incluye una interfaz grafica de escritorio con selectores de proveedor y
+ modelo y un area amplia para escribir el pedido; una extension para
+ Inkscape (menu Extensiones > Agente IA) y un complemento para GIMP
+ (menu Filtros > IA) para las versiones 3.0 y 2.10.
+ .
+ El nucleo usa unicamente la biblioteca estandar de Python, por lo que
+ funciona tambien dentro del interprete embebido de Inkscape y de GIMP.

@@ -1,0 +1,4 @@
+# Solo para construir / regenerar / revisar. La app en runtime NO necesita nada de esto.
+pyinstaller>=6.0     # .exe (Windows) y binario Linux empaquetado
+Pillow>=10           # scripts/make_icon.py: assets/icon.ico, .icns, .png
+PyYAML>=6            # validar packaging/flatpak/*.yml en pruebas locales

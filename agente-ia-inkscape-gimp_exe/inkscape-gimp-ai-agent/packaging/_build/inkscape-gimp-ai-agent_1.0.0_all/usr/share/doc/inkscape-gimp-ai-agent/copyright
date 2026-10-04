@@ -1,0 +1,7 @@
+Formato: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: inkscape-gimp-ai-agent
+Source: https://example.org/inkscape-gimp-ai-agent
+
+Files: *
+Copyright: 2026 Agente IA
+License: MIT

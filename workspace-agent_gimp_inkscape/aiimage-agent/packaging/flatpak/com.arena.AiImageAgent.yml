@@ -1,0 +1,115 @@
+app-id: com.arena.AiImageAgent
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: ai-image-agent
+separate-locales: false
+rename-icon: ai-image-agent
+finish-args:
+  # GUI Tk (X11 o Wayland)
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  # llamadas a la API del proveedor (OpenAI/Anthropic/Gemini/OpenRouter) o al gateway local
+  - --share=network
+  # leer y escribir los SVG/PNG del usuario en su home
+  - --filesystem=home
+  - --device=dri
+  # lanzar Inkscape/GIMP si están instalados como Flatpak (flatpak run … --batch)
+  - --talk-name=org.freedesktop.Flatpak
+  - --env=LD_LIBRARY_PATH=/app/lib
+  - --env=PYTHONPATH=/app/lib/ai-image-agent
+
+# ---------------------------------------------------------------------------
+# Tcl/Tk y Python se compilan dentro de la app: el runtime freedesktop no trae
+# el módulo _tkinter. Inkscape y GIMP NO se empaquetan (pesan demasiado): el
+# agente los busca en el sistema o los lanza vía `flatpak run`.
+# ---------------------------------------------------------------------------
+modules:
+  - name: tcl
+    buildsystem: autotools
+    builddir: true
+    subdir: tcl8.6.14/unix
+    config-opts:
+      - --prefix=/app
+      - --libdir=/app/lib
+      - --enable-threads
+      - --enable-shared
+      - --disable-static
+    cleanup:
+      - /man
+      - '*.a'
+      - /lib/tcl8.6/tcltest*
+
+  - name: tk
+    buildsystem: autotools
+    builddir: true
+    subdir: tk8.6.15/unix
+    config-opts:
+      - --prefix=/app
+      - --libdir=/app/lib
+      - --enable-threads
+      - --enable-shared
+      - --disable-static
+      - --with-tcl=/app/lib
+      - --with-tclsh=/app/bin/tclsh8.6
+    cleanup:
+      - /man
+      - '*.a'
+
+  - name: python3
+    buildsystem: autotools
+    builddir: true
+    subdir: Python-3.11.10
+    config-opts:
+      - --prefix=/app
+      - --libdir=/app/lib
+      - --enable-shared
+      - --with-ensurepip=install
+      - --with-system-ffi
+      - --with-tcltk-includes=-I/app/include
+      - --with-tcltk-libs=-L/app/lib
+    post-install:
+      - rm -rf /app/lib/python3.11/test /app/lib/python3.11/idlelib
+      - rm -rf /app/lib/python3.11/turtledemo /app/lib/python3.11/lib2to3
+      - rm -rf /app/lib/python3.11/ensurepip/_bundled
+      - find /app/lib/python3.11 -name '__pycache__' -type d -exec rm -rf {} +
+      - find /app/lib/python3.11 -name '*.pyc' -delete
+      - find /app -name 'libpython3.11.a' -delete
+    cleanup:
+      - /share/man
+      - '*.a'
+    sources:
+      - type: archive
+        url: https://www.python.org/ftp/python/3.11.10/Python-3.11.10.tgz
+        sha256: e3a59020660e33518c73257aa59bc19a2b14bc8a7ff1e7362e631b15d5eb96f7
+        x-checker-data:
+          type: anitya
+          project-name: python
+          versions:
+            "<": "3.12"
+          url-template: https://www.python.org/ftp/python/{version}/Python-{version}.tgz
+          tag-prefix: v
+
+  - name: ai-image-agent
+    buildsystem: simple
+    build-commands:
+      - install -d /app/lib/ai-image-agent
+      - cp -a aiimage_agent /app/lib/ai-image-agent/
+      - cp -a assets /app/lib/ai-image-agent/assets
+      - find /app/lib/ai-image-agent -name '__pycache__' -type d -exec rm -rf {} +
+      - install -Dm755 packaging/flatpak/ai-image-agent /app/bin/ai-image-agent
+      - install -Dm644 assets/icon.png /app/share/icons/hicolor/256x256/apps/ai-image-agent.png
+      - install -Dm644 assets/icon-512.png /app/share/icons/hicolor/512x512/apps/ai-image-agent.png
+      - install -Dm644 packaging/linux/ai-image-agent.desktop /app/share/applications/com.arena.AiImageAgent.desktop
+      - install -Dm644 packaging/flatpak/com.arena.AiImageAgent.metainfo.xml /app/share/metainfo/com.arena.AiImageAgent.metainfo.xml
+    sources:
+      - type: dir
+        path: ../..
+      - type: file
+        path: com.arena.AiImageAgent.metainfo.xml
+        dest: packaging/flatpak/
+      - type: file
+        path: ai-image-agent
+        dest: packaging/flatpak/

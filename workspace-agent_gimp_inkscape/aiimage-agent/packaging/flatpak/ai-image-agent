@@ -1,0 +1,23 @@
+#!/bin/sh
+# Lanzador dentro del sandbox Flatpak.
+#
+# Por qué un envoltorio y no "python3 -m ...":
+#   * el sandbox no ve /usr: Python, Tcl y Tk viven en /app, así que hay que
+#     decirle a ld.so y a Tk dónde están;
+#   * se fuerza PYTHONHOME para que no se confunda con el python del host.
+set -e
+
+export PYTHONHOME=/app
+export LD_LIBRARY_PATH=/app/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+export TCL_LIBRARY=/app/lib/tcl8.6
+export TK_LIBRARY=/app/lib/tk8.6
+export PYTHONPATH=/app/lib/ai-image-agent${PYTHONPATH:+:$PYTHONPATH}
+export PYTHONDONTWRITEBYTECODE=1
+export GI_TYPELIB_PATH=/app/lib/girepository-1.0
+
+# Los archivos del usuario ya están montados (--filesystem=home); si no, xdg-open
+# no hace falta: la app abre Inkscape/GIMP por línea de órdenes.
+PY=/app/bin/python3
+[ -x "$PY" ] || PY=/app/bin/python3.11
+
+exec "$PY" -m aiimage_agent "$@"

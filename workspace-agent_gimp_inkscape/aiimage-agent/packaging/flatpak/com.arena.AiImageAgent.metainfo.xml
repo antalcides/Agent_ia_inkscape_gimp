@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.arena.AiImageAgent</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>AI Image Agent</name>
+  <summary>Agente de IA para crear y corregir imágenes en Inkscape y GIMP</summary>
+  <developer_name>Arena.ai</developer_name>
+
+  <description>
+    <p>
+      Escribe qué necesitas, elige proveedor y modelo (OpenAI, Anthropic, Google
+      Gemini, Ollama, LM Studio, OpenRouter u OmniRoute) y el agente convierte el
+      pedido en un plan de pasos ejecutables: genera o corrige SVG para Inkscape
+      y secuencias Script-Fu / Python-Fu para GIMP, las ejecuta, muestra la
+      consola y previsualiza el resultado. Si un paso falla, devuelve el error
+      real al modelo para que lo repare.
+    </p>
+    <p>
+      Los modelos locales (Ollama, LM Studio, OmniRoute) funcionan sin conexión a
+      Internet y sin API key. Inkscape y GIMP se usan desde el sistema o desde
+      sus Flatpaks (org.inkscape.Inkscape, org.gimp.GIMP).
+    </p>
+  </description>
+
+  <categories>
+    <category>Graphics</category>
+    <category>VectorGraphics</category>
+    <category>Photography</category>
+    <category>Utility</category>
+  </categories>
+  <keywords>
+    <keyword>inkscape</keyword>
+    <keyword>gimp</keyword>
+    <keyword>svg</keyword>
+    <keyword>vector</keyword>
+    <keyword>ai</keyword>
+    <keyword>ollama</keyword>
+    <keyword>script-fu</keyword>
+  </keywords>
+
+  <launchable type="desktop-id">com.arena.AiImageAgent.desktop</launchable>
+  <url type="homepage">https://arena.ai</url>
+
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-info">mild</content_attribute>
+  </content_rating>
+
+  <releases>
+    <release version="@VERSION@" date="2026-09-18">
+      <description>
+        <p>Primera versión: GUI Tk con 7 proveedores, plan JSON editable, motor de
+        ejecución para Inkscape/GIMP, auto-reparación y CLI headless.</p>
+      </description>
+    </release>
+  </releases>
+</component>

@@ -1,0 +1,5 @@
+#!/bin/sh
+# Lanzador del Agente IA para Inkscape y GIMP
+PYBIN=python3
+command -v "$PYBIN" >/dev/null 2>&1 || PYBIN=python3.11
+exec "$PYBIN" /usr/lib/inkscape-gimp-ai-agent/agent.py "$@"

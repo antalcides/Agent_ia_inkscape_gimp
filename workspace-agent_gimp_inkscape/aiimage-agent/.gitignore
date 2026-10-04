@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.installed.cfg
+
+# entornos virtuales y cachés de build
+.venv/
+.venv-build/
+.venv-*/
+.flatpak-builder/
+*.tar.xz
+
+# herramientas
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.idea/
+.vscode/
+*.swp
+
+# artefactos locales
+*.log
+assets/preview-*.png
+nohup.out
+
+# la captura de la GUI SÍ se versiona: la usa el README
+# (regenerarla: AIA_SCREENSHOT=assets/gui-screenshot.png xvfb-run -a python3 scripts/gui_probe.py full_flow)

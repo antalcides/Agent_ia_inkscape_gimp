@@ -1,0 +1,17 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=AI Image Agent
+Name[es]=Agente de IA para imágenes
+GenericName=Inkscape & GIMP AI assistant
+GenericName[es]=Asistente de IA para Inkscape y GIMP
+Comment=Crea y corrige vectores y bitmaps con IA (OpenAI, Anthropic, Gemini, Ollama, LM Studio, OpenRouter, OmniRoute)
+Comment[es]=Crea y corrige vectores y bitmaps con IA
+Exec=@LAUNCHER@ %F
+Icon=ai-image-agent
+Terminal=false
+Categories=Graphics;VectorGraphics;Photography;Utility;
+Keywords=svg;inkscape;gimp;ai;vector;bitmap;script-fu;
+StartupNotify=true
+StartupWMClass=ai-image-agent
+MimeType=image/svg+xml;image/png;image/jpeg;
